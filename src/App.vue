@@ -1,28 +1,42 @@
+<!--
+    Name: Angela McLaughlin
+    Class Section: CIS-131-W01-Fall 2020
+    Date: 12/5/2020
+-->
+
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="container">
+    <div>
+      <Header theTitle="Popular TV Shows"/>
+    </div>
+    <div class="cards">
+      <Card v-bind:TVList="shows"/>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header.vue'
+import Card from './components/Card.vue'
+import axios from 'axios'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Header,
+    Card
+  },
+  data(){
+    return {
+      shows:[],
+    }
+  },
+  mounted(){
+    axios.get('https://api.themoviedb.org/3/tv/popular?api_key=28ef03c77cb45d48b1a5a1ce24db79ea')
+    .then((res) => {
+      this.shows = res.data.results;
+      console.log(this.shows)
+  })
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
