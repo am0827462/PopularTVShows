@@ -7,7 +7,7 @@
 <template>
   <div id="app" class="container">
     <div>
-      <Header theTitle="Popular TV Shows"/>
+      <Header theTitle="Pop TV Shows!"/>
     </div>
     <div class="cards">
       <Card v-bind:TVList="shows"/>
